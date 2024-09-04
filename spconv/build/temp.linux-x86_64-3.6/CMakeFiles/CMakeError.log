@@ -1,0 +1,84 @@
+Compiling the CUDA compiler identification source file "CMakeCUDACompilerId.cu" failed.
+Compiler: /usr/local/cuda-11.4/bin/nvcc 
+Build flags: "--expt-relaxed-constexpr"
+Id flags:  -v;--keep;--keep-dir;tmp
+
+The output was:
+1
+#$ _NVVM_BRANCH_=nvvm
+#$ _SPACE_= 
+#$ _CUDART_=cudart
+#$ _HERE_=/usr/local/cuda-11.4/bin
+#$ _THERE_=/usr/local/cuda-11.4/bin
+#$ _TARGET_SIZE_=
+#$ _TARGET_DIR_=
+#$ _TARGET_DIR_=targets/x86_64-linux
+#$ TOP=/usr/local/cuda-11.4/bin/..
+#$ NVVMIR_LIBRARY_DIR=/usr/local/cuda-11.4/bin/../nvvm/libdevice
+#$ LD_LIBRARY_PATH=/usr/local/cuda-11.4/bin/../lib:/usr/local/cuda-11.4/lib64
+#$ PATH=/usr/local/cuda-11.4/bin/../nvvm/bin:/usr/local/cuda-11.4/bin:/usr/local/cuda-11.4/bin:/home/sys-511/anaconda3/envs/cp/bin:/home/sys-511/anaconda3/bin:/home/sys-511/anaconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+#$ INCLUDES="-I/usr/local/cuda-11.4/bin/../targets/x86_64-linux/include"  
+#$ LIBRARIES=  "-L/usr/local/cuda-11.4/bin/../targets/x86_64-linux/lib/stubs" "-L/usr/local/cuda-11.4/bin/../targets/x86_64-linux/lib"
+#$ CUDAFE_FLAGS=
+#$ PTXAS_FLAGS=
+nvcc fatal   : Don't know what to do with '"--expt-relaxed-constexpr"'
+
+
+Performing C++ SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/sys-511/students/jw/CenterPoint/spconv/build/temp.linux-x86_64-3.6/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_3a557/fast && /usr/bin/make -f CMakeFiles/cmTC_3a557.dir/build.make CMakeFiles/cmTC_3a557.dir/build
+make[1]: 进入目录“/home/sys-511/students/jw/CenterPoint/spconv/build/temp.linux-x86_64-3.6/CMakeFiles/CMakeTmp”
+Building CXX object CMakeFiles/cmTC_3a557.dir/src.cxx.o
+/usr/bin/c++    -DVERSION_INFO=\"1.0\" -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_3a557.dir/src.cxx.o -c /home/sys-511/students/jw/CenterPoint/spconv/build/temp.linux-x86_64-3.6/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_3a557
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3a557.dir/link.txt --verbose=1
+/usr/bin/c++  -DVERSION_INFO=\"1.0\" -DCMAKE_HAVE_LIBC_PTHREAD    CMakeFiles/cmTC_3a557.dir/src.cxx.o  -o cmTC_3a557 
+/usr/bin/ld: CMakeFiles/cmTC_3a557.dir/src.cxx.o: in function `main':
+src.cxx:(.text+0x46): undefined reference to `pthread_create'
+/usr/bin/ld: src.cxx:(.text+0x52): undefined reference to `pthread_detach'
+/usr/bin/ld: src.cxx:(.text+0x63): undefined reference to `pthread_join'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_3a557.dir/build.make:87：cmTC_3a557] 错误 1
+make[1]: 离开目录“/home/sys-511/students/jw/CenterPoint/spconv/build/temp.linux-x86_64-3.6/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_3a557/fast] 错误 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/sys-511/students/jw/CenterPoint/spconv/build/temp.linux-x86_64-3.6/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_9e898/fast && /usr/bin/make -f CMakeFiles/cmTC_9e898.dir/build.make CMakeFiles/cmTC_9e898.dir/build
+make[1]: 进入目录“/home/sys-511/students/jw/CenterPoint/spconv/build/temp.linux-x86_64-3.6/CMakeFiles/CMakeTmp”
+Building CXX object CMakeFiles/cmTC_9e898.dir/CheckFunctionExists.cxx.o
+/usr/bin/c++    -DVERSION_INFO=\"1.0\" -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_9e898.dir/CheckFunctionExists.cxx.o -c /home/sys-511/students/jw/CenterPoint/spconv/build/temp.linux-x86_64-3.6/CMakeFiles/CheckLibraryExists/CheckFunctionExists.cxx
+Linking CXX executable cmTC_9e898
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9e898.dir/link.txt --verbose=1
+/usr/bin/c++  -DVERSION_INFO=\"1.0\" -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_9e898.dir/CheckFunctionExists.cxx.o  -o cmTC_9e898  -lpthreads 
+/usr/bin/ld: 找不到 -lpthreads
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_9e898.dir/build.make:87：cmTC_9e898] 错误 1
+make[1]: 离开目录“/home/sys-511/students/jw/CenterPoint/spconv/build/temp.linux-x86_64-3.6/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_9e898/fast] 错误 2
+
+
+
